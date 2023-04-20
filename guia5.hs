@@ -13,8 +13,8 @@ fact n = foldr (*) 1 [1..n]
 
 -- ej12. Redefinir la funcion and tal que and xs se verifica si todos los elementos de xs son verdaderos. Por ejemplo: and [1<2, 2<3, 1/=0] = True, and [1<2, 2<3, 1 == 0] = False.
 
-andRd :: [a] -> Bool
-andRd xs = 
+andRd :: [Bool] -> Bool
+andRd xs = foldr (and) True xs
 
 --ej13. Usando foldl o foldr definir una funcion tam::[a]->Int que devuelve la cantidad de elementos de una lista dada. Dar un ejemplo en los cuales foldr y foldl evalúen diferente con los mismos parámetros.
 
