@@ -141,7 +141,7 @@ ocurrencias n xs = length ([x| x<-xs, x==n])
 --ej 22. Escribir la funcion split2 :: [a] - > [([a],[a])], que dada una lista xs, devuelve la lista con todas las formas de partir xs en dos. Por ejemplo: split2 [1,2,3] = [([],[1,2,3]), ([1],[2,3]), ([1,2],[3]),([1,2,3],[])].
 
 split2 :: [a] -> [([a],[a])]
-split2 xs = [(take n xs , drops n xs) | n<- [0..length (xs)]]
+split2 xs = [(take n xs , drop n xs) | n<- [0..length (xs)]]
 
 --ej 18, 22, 23 son tipo parcial, averiguar que es nub en haskell
 
