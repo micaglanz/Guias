@@ -16,3 +16,24 @@ maj  True True _  = True
 maj  True _ True = True
 maj  _ True True = True
 maj  otherwise = False 
+
+--paraTodo :: [Int] -> [a] -> (Int -> [a] -> Bool)-> Bool
+
+--existe 
+
+
+--sumatoria
+sumatoria :: [Int] -> [Int] -> (Int -> [Int] -> Bool) -> Int
+sumatoria is xs p = sum[ xs!!i | i<-is , p i xs  ]
+
+--productoria
+productoria :: [Int] -> [Int] -> (Int -> [Int] -> Bool) -> Int
+productoria is xs p = product[ xs!!i | i<-is , p i xs  ]
+
+--contatoria
+contatoria :: [Int] -> [Int] -> (Int -> [Int] -> Bool) -> Int
+contatoria is xs p = length[ xs!!i | i<-is , p i xs  ]
+
+--propiedad/predicado
+isEven :: Int -> [Int] -> Bool
+isEven i xs = mod (xs!!i) 2 == 0
