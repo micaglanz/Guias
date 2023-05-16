@@ -37,3 +37,62 @@ contatoria is xs p = length[ xs!!i | i<-is , p i xs  ]
 --propiedad/predicado
 isEven :: Int -> [Int] -> Bool
 isEven i xs = mod (xs!!i) 2 == 0
+
+
+
+-----------------------------------------------------CUANTIFICADORES----------------------------------------------------------------------
+--para todo
+paraTodo :: [Int] -> [a] -> (Int -> [a] -> Bool)-> Bool
+paraTodo is xs p = and[ p i xs | i<-is ]
+
+--existe
+existe :: [Int] -> [a] -> (Int -> [a] -> Bool)-> Bool
+existe is xs p = or[ p i xs | i<-is]
+
+--sumatoria
+sumatoria :: [Int] -> [Int] -> (Int -> [Int] -> Bool) -> Int
+sumatoria is xs p = sum[ xs!!i | i<-is , p i xs  ]
+
+--productoria
+productoria :: [Int] -> [Int] -> (Int -> [Int] -> Bool) -> Int
+productoria is xs p = product[ xs!!i | i<-is , p i xs  ]
+
+--contatoria
+contatoria :: [Int] -> [Int] -> (Int -> [Int] -> Bool) -> Int
+contatoria is xs p = length[ xs!!i | i<-is , p i xs  ]
+
+-------------------------------------------------- GUIA 9 --------------------------------------------------------------------------------
+--ejercicio 1 
+
+--f es una funcion que determina si los elementos de una lista xs son iguales.
+
+elemIguales :: Eq a => [a] -> Bool
+elemIguales xs = and[ xs!!0 == xs!!i | i<-[1..length xs - 1]]
+
+--f es una funcion que determina si los elementos de una lista xs son todos diferentes.
+
+elemDif :: Eq a => [a] -> Bool
+elemDif xs = and[ xs!!i /= xs!!j | j<-[0..length xs - 1] , i<-[0..length xs - 1] , i/=j ]
+
+--f es una funcion que determina si los elementos de una lista xs estan ordenados (de menor a mayor))
+
+listOrd :: Ord a => [a] -> Bool
+listOrd xs = and[ xs!!i <= xs!!j | i<-[0..length xs - 1] , j<-[0..length xs - 1] , i<j ]
+
+--P es un predicado que es true sii cuando aparece 1 en xs entonces debe aparecer 0 en xs.
+
+unoCero :: Num a => Eq a => [a] -> Bool
+unoCero xs = implicacion (or[ xs!!i == 1 | i<-[0..length xs -1]]) (or[ xs!!i == 0 | i<-[0..length xs -1]])
+
+
+implicacion :: Bool -> Bool -> Bool
+implicacion False _ = True
+implicacion True x = x 
+
+--p es el producto de todos los elementos primos de xs.
+produPrimo :: [Int] -> Int
+produPrimo xs = product [ i | i<-[0..length xs -1] , esPrimo (xs!!i) ]
+
+esPrimo :: Int -> Bool
+esPrimo 1 = False
+esPrimo n = and [ (mod n i ) /= 0 | i<- [2..n]]
